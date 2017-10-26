@@ -2,9 +2,17 @@ from flask import Flask
 from flask import request
 from flask import json
 
+import dialogflow
+
 app = Flask(__name__)
 
-@app.route("/dialogflowwebhook")
+@app.route("/dialogflowwebhook", methods=['POST'])
 def handler():
-	print(request.get_json())
-	return json.jsonify("{'key':1}")
+	data = request.get_json()
+
+	# print(json.dumps(data, indent=4))
+	
+	df = dialogflow.Parser()
+	response = df.parse(data)
+
+	return response
