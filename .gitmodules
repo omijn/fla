@@ -1,0 +1,3 @@
+[submodule "language/gender"]
+	path = language/gender
+	url = https://github.com/omijn/gender-fr

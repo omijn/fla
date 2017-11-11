@@ -2,9 +2,8 @@ import json
 
 import strings
 import language.conjugator
-import language.gender
+import language.gender.gender_fr
 
-# import .language.genders
 # import .language.pronouncer
 # import .language.translator
 # import .language.examples
@@ -28,7 +27,7 @@ class Parser():
         
         elif intent == strings.GENDER_INTENT:
             word = data['result']['parameters']['word']
-            g = language.gender.get_gender(word)
+            g = language.gender.gender_fr.get_gender(word)
             response = self.formatter.display_gender(word, g)            
 
         elif intent == strings.PRONOUNCE_INTENT:
@@ -101,8 +100,8 @@ class Formatter:
         return json.dumps(response)
 
     def display_gender(self, word, gender_code):
-        if gender_code in language.gender.genders:
-            msg = "{} is {}".format(word, language.gender.genders[gender_code])
+        if gender_code in language.gender.gender_fr.genders:
+            msg = "{} is {}".format(word, language.gender.gender_fr.genders[gender_code])
         else:
             msg = strings.WORD_NOT_FOUND
 
