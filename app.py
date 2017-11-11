@@ -10,7 +10,7 @@ app = Flask(__name__)
 def handler():
 	data = request.get_json()
 
-	# print(json.dumps(data, indent=4))
+	print(json.dumps(data, indent=4))
 	
 	df = dialogflow.Parser()
 	response = df.parse(data)

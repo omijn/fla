@@ -1,7 +1,8 @@
 import json
 
 import strings
-import language.conjugator as conjugator
+import language.conjugator
+import language.gender
 
 # import .language.genders
 # import .language.pronouncer
@@ -25,9 +26,10 @@ class Parser():
             verb = data['result']['parameters']['word']
             response = self.formatter.ask_verb_tense(verb)
         
-        elif intent == strings.GENDER_INTENT:           
-            pass
-            # response = genderstrings.get_gender()
+        elif intent == strings.GENDER_INTENT:
+            word = data['result']['parameters']['word']
+            g = language.gender.get_gender(word)
+            response = self.formatter.display_gender(word, g)            
 
         elif intent == strings.PRONOUNCE_INTENT:
             pass
@@ -51,7 +53,7 @@ class Parser():
                 parts = payload.split(strings.PAYLOAD_DELIMITER)
 
                 if parts[0] == strings.PAYLOAD_CONJUGATE:
-                    conjugation = conjugator.conjugate(verb=parts[1], tense=parts[2])
+                    conjugation = language.conjugator.conjugate(verb=parts[1], tense=parts[2])
                     response = self.formatter.conjugate_verb(conjugation)
                     
         return response     
@@ -81,7 +83,7 @@ class Formatter:
             "followupEvent": {}
         }
 
-        quick_replies = [{"content_type":"text", "title": tense['title'], "payload": "{}{}{}{}{}".format(strings.PAYLOAD_CONJUGATE, strings.PAYLOAD_DELIMITER, verb, strings.PAYLOAD_DELIMITER, tense['code'])} for tense in conjugator.tenses]
+        quick_replies = [{"content_type":"text", "title": tense['title'], "payload": "{}{}{}{}{}".format(strings.PAYLOAD_CONJUGATE, strings.PAYLOAD_DELIMITER, verb, strings.PAYLOAD_DELIMITER, tense['code'])} for tense in language.conjugator.tenses]
         response['data']['facebook']['quick_replies'].extend(quick_replies)
 
         return json.dumps(response)
@@ -90,6 +92,23 @@ class Formatter:
         response = {
             "speech": conjugation,
             "displayText": conjugation,
+            "data": {},
+            "contextOut": [],
+            "source": strings.DATA_SOURCE,
+            "followupEvent": {}
+        }
+
+        return json.dumps(response)
+
+    def display_gender(self, word, gender_code):
+        if gender_code in language.gender.genders:
+            msg = "{} is {}".format(word, language.gender.genders[gender_code])
+        else:
+            msg = strings.WORD_NOT_FOUND
+
+        response = {
+            "speech": msg,
+            "displayText": msg,
             "data": {},
             "contextOut": [],
             "source": strings.DATA_SOURCE,

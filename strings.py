@@ -17,3 +17,5 @@ PAYLOAD_DELIMITER = "<::>"
 HOW_TO_CONJ = "How do you want to conjugate the verb?"
 
 
+# genders
+WORD_NOT_FOUND = "Sorry, that word was not found."
