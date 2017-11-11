@@ -2,6 +2,7 @@
 
 CONJUGATE_INTENT = "conjugate"
 GENDER_INTENT    = "genderWord"
+NUMERIC_INTENT   = "numbers"
 PRONOUNCE_INTENT = "pronounce"
 TRANSLATE_INTENT = "translate"
 SENTENCE_INTENT  = "useInSentence"

@@ -4,6 +4,8 @@ import strings
 import language.conjugator
 import language.gender.gender_fr
 
+from num2words import num2words
+
 # import .language.pronouncer
 # import .language.translator
 # import .language.examples
@@ -19,7 +21,7 @@ class Parser():
     def parse(self, data):
         lang = data['lang']
         intent = data['result']['metadata']['intentName']
-        response = "This text will never be seen"
+        response = ""        
 
         if intent == strings.CONJUGATE_INTENT:
             verb = data['result']['parameters']['word']
@@ -29,6 +31,12 @@ class Parser():
             word = data['result']['parameters']['word']
             g = language.gender.gender_fr.get_gender(word)
             response = self.formatter.display_gender(word, g)            
+
+        elif intent == strings.NUMERIC_INTENT:
+            number = data['result']['parameters']['number']
+            word_form_en = num2words(number, lang='en')
+            word_form_fr = num2words(number, lang='fr')
+            response = self.formatter.display_number(word_form_en, word_form_fr)
 
         elif intent == strings.PRONOUNCE_INTENT:
             pass
@@ -101,13 +109,27 @@ class Formatter:
 
     def display_gender(self, word, gender_code):
         if gender_code in language.gender.gender_fr.genders:
-            msg = "{} is {}".format(word, language.gender.gender_fr.genders[gender_code])
+            msg = u"{} is {}".format(word, language.gender.gender_fr.genders[gender_code])
         else:
             msg = strings.WORD_NOT_FOUND
 
         response = {
             "speech": msg,
             "displayText": msg,
+            "data": {},
+            "contextOut": [],
+            "source": strings.DATA_SOURCE,
+            "followupEvent": {}
+        }
+
+        return json.dumps(response)
+
+    def display_number(self, num_en, num_fr):
+
+        word_form = u"FR: {}\n\nEN: {}".format(num_fr, num_en)
+        response = {
+            "speech": word_form,
+            "displayText": word_form,
             "data": {},
             "contextOut": [],
             "source": strings.DATA_SOURCE,
