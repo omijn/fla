@@ -1,4 +1,7 @@
 # coding=utf-8
+
+import wiki_telecharger_fr as wtf
+
 tenses = [
 	{
 		"code": "present",
@@ -21,5 +24,7 @@ def conjugate(verb, tense):
 	
 	Returns a string.
 	"""
+
+	conjugation = wtf.scrape(verb, tense)
 
 	return "sample conjugation"
