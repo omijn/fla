@@ -60,7 +60,7 @@ class Parser():
                 parts = payload.split(strings.PAYLOAD_DELIMITER)
 
                 if parts[0] == strings.PAYLOAD_CONJUGATE:
-                    conjugation = language.conjugator.conjugate(verb=parts[1], tense=parts[2])
+                    conjugation = language.conjugator.conjugate(verb=parts[1], tense_code=parts[2])
                     response = self.formatter.conjugate_verb(conjugation)
                     
         return response     
@@ -90,7 +90,7 @@ class Formatter:
             "followupEvent": {}
         }
 
-        quick_replies = [{"content_type":"text", "title": tense['title'], "payload": "{}{}{}{}{}".format(strings.PAYLOAD_CONJUGATE, strings.PAYLOAD_DELIMITER, verb, strings.PAYLOAD_DELIMITER, tense['code'])} for tense in language.conjugator.tenses]
+        quick_replies = [{"content_type":"text", "title": tense['name'], "payload": "{}{}{}{}{}".format(strings.PAYLOAD_CONJUGATE, strings.PAYLOAD_DELIMITER, verb, strings.PAYLOAD_DELIMITER, tense['code'])} for tense in language.conjugator.tenses]
         response['data']['facebook']['quick_replies'].extend(quick_replies)
 
         return json.dumps(response)

@@ -21,6 +21,9 @@ HOW_TO_CONJ = "How do you want to conjugate the verb?"
 # genders
 WORD_NOT_FOUND = "Sorry, that word was not found."
 
+# conjugation
+VERB_NOT_FOUND = "Sorry, that verb was not found."
+
 # API endpoints and data sources
 
 	# google translate
