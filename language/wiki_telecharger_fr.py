@@ -1,6 +1,5 @@
 import strings
 import requests
-from conjugator import tenses
 from bs4 import BeautifulSoup
 
 """

@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import json
 
 import strings
@@ -19,21 +21,27 @@ class Parser():
         self.formatter = Formatter()
 
     def parse(self, data):
-        lang = data['lang']
-        intent = data['result']['metadata']['intentName']
+        lang = data['queryResult']['languageCode']
+        intent = data['queryResult']['intent']['displayName']
         response = ""        
 
         if intent == strings.CONJUGATE_INTENT:
-            verb = data['result']['parameters']['word']
-            response = self.formatter.ask_verb_tense(verb)
+            # verb = data['queryResult']['parameters']['frenchVerb']
+            response = self.formatter.ask_verb_tense()
         
+        elif intent == strings.CONJUGATE_MORE_INTENT:
+            response = self.formatter.ask_verb_tense(userWantsMoreOptions=True)
+
+        elif intent == strings.CONJUGATE_VERB_INTENT:
+            pass
+
         elif intent == strings.GENDER_INTENT:
-            word = data['result']['parameters']['word']
+            word = data['queryResult']['parameters']['word']
             g = language.gender.gender_fr.get_gender(word)
             response = self.formatter.display_gender(word, g)            
 
         elif intent == strings.NUMERIC_INTENT:
-            number = data['result']['parameters']['number']
+            number = data['queryResult']['parameters']['number']
             word_form_en = num2words(number, lang='en')
             word_form_fr = num2words(number, lang='fr')
             response = self.formatter.display_number(word_form_en, word_form_fr)
@@ -71,38 +79,48 @@ class Formatter:
     def __init__(self):
         pass
 
-    def ask_verb_tense(self, verb):
+    def ask_verb_tense(self, userWantsMoreOptions=False):
         """Ask the user what tense to conjugate the given verb in.
             Facebook: Use quick replies
         """
 
+        if userWantsMoreOptions:
+            quick_replies = [tense['name'] for tense in language.conjugator.tenses[9:]]
+        else:
+            quick_replies = [tense['name'] for tense in language.conjugator.tenses[:9]]
+            quick_replies.append(strings.SHOW_MORE_TENSES)
+
+        print(quick_replies)
+
         response = {
-            "speech": strings.HOW_TO_CONJ,
-            "displayText": strings.HOW_TO_CONJ,
-            "data": {
-                "facebook": {
-                    "text": strings.HOW_TO_CONJ,
-                    "quick_replies":[]
+            "fulfillmentText": strings.HOW_TO_CONJ,            
+            "fulfillmentMessages": [
+                {
+                    "quickReplies": {
+                        "title": strings.HOW_TO_CONJ,
+                        "quickReplies": quick_replies
+                    },
+                    "platform": "FACEBOOK"
                 }
-            },
-            "contextOut": [],
+            ],
+            "outputContexts": [],
             "source": strings.DATA_SOURCE,
-            "followupEvent": {}
+            "followupEventInput": {}
         }
 
-        quick_replies = [{"content_type":"text", "title": tense['name'], "payload": "{}{}{}{}{}".format(strings.PAYLOAD_CONJUGATE, strings.PAYLOAD_DELIMITER, verb, strings.PAYLOAD_DELIMITER, tense['code'])} for tense in language.conjugator.tenses]
-        response['data']['facebook']['quick_replies'].extend(quick_replies)
+        # quick_replies = [{"content_type":"text", "title": tense['name'], "payload": "{}{}{}{}{}".format(strings.PAYLOAD_CONJUGATE, strings.PAYLOAD_DELIMITER, verb, strings.PAYLOAD_DELIMITER, tense['code'])} for tense in language.conjugator.tenses]    
+        # response['fulfillmentMessages'][0]['quickReplies'].extend(quick_replies)
 
+        print(json.dumps(response, indent=4))
         return json.dumps(response)
 
     def conjugate_verb(self, conjugation):
         response = {
-            "speech": conjugation,
-            "displayText": conjugation,
-            "data": {},
-            "contextOut": [],
+            "fulfillmentText": conjugation,            
+            "payload": {},
+            "outputContexts": [],
             "source": strings.DATA_SOURCE,
-            "followupEvent": {}
+            "followupEventInput": {}
         }
 
         return json.dumps(response)
@@ -114,12 +132,11 @@ class Formatter:
             msg = strings.WORD_NOT_FOUND
 
         response = {
-            "speech": msg,
-            "displayText": msg,
-            "data": {},
-            "contextOut": [],
+            "fulfillmentText": msg,            
+            "payload": {},
+            "outputContexts": [],
             "source": strings.DATA_SOURCE,
-            "followupEvent": {}
+            "followupEventInput": {}
         }
 
         return json.dumps(response)
@@ -128,12 +145,11 @@ class Formatter:
 
         word_form = u"FR: {}\n\nEN: {}".format(num_fr, num_en)
         response = {
-            "speech": word_form,
-            "displayText": word_form,
-            "data": {},
-            "contextOut": [],
+            "fulfillmentText": word_form,            
+            "payload": {},
+            "outputContexts": [],
             "source": strings.DATA_SOURCE,
-            "followupEvent": {}
+            "followupEventInput": {}
         }
 
         return json.dumps(response)
