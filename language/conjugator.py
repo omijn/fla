@@ -44,42 +44,42 @@ tenses = [
 		"name": strings.TENSES["IND_FA"]
 	},
 	{	
-		"code": 8,
+		"code": 9,
 		"mode": strings.MODES["SUBJ"],
 		"name": strings.TENSES["SUBJ_PRES"]
 	},
 	{	
-		"code":  9,
+		"code":  10,
 		"mode": strings.MODES["SUBJ"],
 		"name": strings.TENSES["SUBJ_P"]
 	},
 	{	
-		"code": 10,
+		"code": 11,
 		"mode": strings.MODES["SUBJ"],
 		"name": strings.TENSES["SUBJ_IMP"]
 	},
 	{	
-		"code": 11,
+		"code": 12,
 		"mode": strings.MODES["SUBJ"],
 		"name": strings.TENSES["SUBJ_PQP"]
 	},
 	{	
-		"code": 12,
+		"code": 14,
 		"mode": strings.MODES["COND"],		
 		"name": strings.TENSES["COND_PRES"]
 	},
 	{	
-		"code": 13,
+		"code": 15,
 		"mode": strings.MODES["COND"],		
 		"name": strings.TENSES["COND_P"]
 	},
 	{	
-		"code": 14,
+		"code": 17,
 		"mode": strings.MODES["IMP"],
 		"name": strings.TENSES["IMP_PRES"]
 	},
 	{	
-		"code": 15,
+		"code": 18,
 		"mode": strings.MODES["IMP"],
 		"name": strings.TENSES["IMP_P"]
 	}
@@ -91,14 +91,21 @@ def conjugate(verb, tense):
 	Returns a string.
 	"""
 
-	tense_code = get_tensecode_from_tensename(tense)
-	preamble = u"{}\n{} {}\n\n".format(verb, tenses[tense_code]['mode'], tenses[tense_code]['name'])
-	conjugation = wtf.scrape(verb, tense_code)
+	tense_obj = get_obj_from_name(tense)	
+	preamble = u"{}\n{} {}\n\n".format(verb, tense_obj['mode'], tense_obj['name'])
+	conjugation = wtf.scrape(verb, tense_obj['code'])
 	final_conjugation = preamble + conjugation
 
 	return final_conjugation
 
-def get_tensecode_from_tensename(tensename):
-	for tense in tenses:		
-		if tense['name'] == tensename:
-			return tense['code']
+def get_obj_from_name(tensename):
+	return filter(lambda t: t['name'] == tensename, tenses)[0]
+
+def get_code_from_name(tensename):
+	return filter(lambda t: t['name'] == tense, tenses)[0]['code']
+
+def get_mode_from_code(tensecode):
+	return filter(lambda t: t['code'] == tensecode, tenses)[0]['mode']
+
+def get_name_from_code(tensecode):
+	return filter(lambda t: t['code'] == tensecode, tenses)[0]['name']

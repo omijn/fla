@@ -29,7 +29,7 @@ def scrape(verb, tense_code):
 
 	# find the right table on the page, and loop through all the rows after the 0th row
 	for tr in soup.select("table:nth-of-type(" + str(int(TABLE_OFFSET) + int(tense_code)) + ")")[0].find_all('tr')[1:]:
-		subject = tr.td.string
+		subject = tr.td.get_text().replace(u'\xa0', u' ')
 		verb = tr.td.next_sibling.next_sibling.string
 		scraped_conjugation += u"{}{}\n".format(subject, verb)
 
