@@ -1,5 +1,5 @@
 # coding=utf-8
-
+import strings
 import wiki_telecharger_fr as wtf
 
 tenses = [
@@ -85,14 +85,20 @@ tenses = [
 	}
 ]
 
-def conjugate(verb, tense_code):
+def conjugate(verb, tense):
 	"""Conjugate given verb in given tense.
 	
 	Returns a string.
 	"""
 
-	preamble = "{}\n{}{}\n\n".format(verb, tenses[tense_code].mode, tenses[tense_code].name)
+	tense_code = get_tensecode_from_tensename(tense)
+	preamble = u"{}\n{} {}\n\n".format(verb, tenses[tense_code]['mode'], tenses[tense_code]['name'])
 	conjugation = wtf.scrape(verb, tense_code)
 	final_conjugation = preamble + conjugation
 
 	return final_conjugation
+
+def get_tensecode_from_tensename(tensename):
+	for tense in tenses:		
+		if tense['name'] == tensename:
+			return tense['code']

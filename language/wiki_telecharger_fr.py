@@ -1,3 +1,4 @@
+# coding=utf-8
 import strings
 import requests
 from bs4 import BeautifulSoup
@@ -24,12 +25,12 @@ def scrape(verb, tense_code):
 	html_doc = res.text
 	soup = BeautifulSoup(html_doc, 'html.parser')	
 
-	scraped_conjugation = ""
+	scraped_conjugation = u""
 
 	# find the right table on the page, and loop through all the rows after the 0th row
 	for tr in soup.select("table:nth-of-type(" + str(int(TABLE_OFFSET) + int(tense_code)) + ")")[0].find_all('tr')[1:]:
 		subject = tr.td.string
 		verb = tr.td.next_sibling.next_sibling.string
-		scraped_conjugation += "{} {}\n".format(subject, verb)
+		scraped_conjugation += u"{}{}\n".format(subject, verb)
 
 	return scraped_conjugation

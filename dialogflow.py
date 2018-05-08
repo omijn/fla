@@ -34,7 +34,9 @@ class Parser():
 
         elif intent == strings.CONJUGATE_VERB_INTENT:
             verb = data['queryResult']['outputContexts'][0]['parameters']['frenchVerb']
-            pass
+            tense = data['queryResult']['queryText']            
+            conjugation = language.conjugator.conjugate(verb, tense)
+            response = self.formatter.display_conjugation(conjugation)
 
         elif intent == strings.GENDER_INTENT:
             word = data['queryResult']['parameters']['word']
@@ -115,7 +117,7 @@ class Formatter:
         # print(json.dumps(response, indent=4))
         return json.dumps(response)
 
-    def conjugate_verb(self, conjugation):
+    def display_conjugation(self, conjugation):
         response = {
             "fulfillmentText": conjugation,            
             "payload": {},

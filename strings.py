@@ -2,59 +2,59 @@
 
 #dialogflow
 
-CONJUGATE_INTENT = "conjugate"
-CONJUGATE_MORE_INTENT = "conjugateMore"
-CONJUGATE_VERB_INTENT = "conjugateVerbFallback"
-GENDER_INTENT    = "genderWord"
-NUMERIC_INTENT   = "numbers"
-PRONOUNCE_INTENT = "pronounce"
-TRANSLATE_INTENT = "translate"
-SENTENCE_INTENT  = "useInSentence"
-WORD_INTENT      = "defineWord"
-FALLBACK_INTENT  = "fallback"
+CONJUGATE_INTENT = u"conjugate"
+CONJUGATE_MORE_INTENT = u"conjugateMore"
+CONJUGATE_VERB_INTENT = u"conjugateVerbFallback"
+GENDER_INTENT    = u"genderWord"
+NUMERIC_INTENT   = u"numbers"
+PRONOUNCE_INTENT = u"pronounce"
+TRANSLATE_INTENT = u"translate"
+SENTENCE_INTENT  = u"useInSentence"
+WORD_INTENT      = u"defineWord"
+FALLBACK_INTENT  = u"fallback"
 
-DATA_SOURCE = "Google/Wiktionary/Other"
+DATA_SOURCE = u"Google/Wiktionary/Other"
 
 # conjugations
-SHOW_MORE_TENSES = "More"
-HOW_TO_CONJ = "How do you want to conjugate the verb?"
+SHOW_MORE_TENSES = u"More"
+HOW_TO_CONJ = u"How do you want to conjugate the verb?"
 
 TENSES = {
-	"IND_PRES": "Présent",
-	"IND_PC": "Passé Composé",
-	"IND_IPF": "Imparfait",
-	"IND_PQP": "Plus-que-parfait",
-	"IND_PS": "Passé Simple",
-	"IND_PA": "Passé Antérieur",
-	"IND_FS": "Futur Simple",
-	"IND_FA": "Futur Antérieur",
-	"SUBJ_PRES": "Présent: subj.",
-	"SUBJ_P": "Passé: subj.",
-	"SUBJ_IMP": "Imparfait: subj.",
-	"SUBJ_PQP": "Plus-que-parfait:sub",
-	"COND_PRES": "Présent: cond.",
-	"COND_P": "Passé: cond.",
-	"IMP_PRES": "Présent: imp.",
-	"IMP_P": "Passé: imp."
+	"IND_PRES": u"Présent",
+	"IND_PC": u"Passé Composé",
+	"IND_IPF": u"Imparfait",
+	"IND_PQP": u"Plus-que-parfait",
+	"IND_PS": u"Passé Simple",
+	"IND_PA": u"Passé Antérieur",
+	"IND_FS": u"Futur Simple",
+	"IND_FA": u"Futur Antérieur",
+	"SUBJ_PRES": u"Présent: subj.",
+	"SUBJ_P": u"Passé: subj.",
+	"SUBJ_IMP": u"Imparfait: subj.",
+	"SUBJ_PQP": u"Plus-que-parfait:sub",
+	"COND_PRES": u"Présent: cond.",
+	"COND_P": u"Passé: cond.",
+	"IMP_PRES": u"Présent: imp.",
+	"IMP_P": u"Passé: imp."
 }
 
 MODES = {
-	"IND": "Indicatif",
-	"SUBJ": "Subjonctif",
-	"COND": "Conditionnel",
-	"IMP": "Impératif"
+	"IND": u"Indicatif",
+	"SUBJ": u"Subjonctif",
+	"COND": u"Conditionnel",
+	"IMP": u"Impératif"
 }
 
-VERB_NOT_FOUND = "Sorry, that verb was not found."
+VERB_NOT_FOUND = u"Sorry, that verb was not found."
 
 # genders
-WORD_NOT_FOUND = "Sorry, that word was not found."
+WORD_NOT_FOUND = u"Sorry, that word was not found."
 
 # API endpoints and data sources
 
 ## google translate
-GT_DETECT = "https://translation.googleapis.com/language/translate/v2/detect"
-GT_TRANSLATE = "https://translation.googleapis.com/language/translate/v2"
+GT_DETECT = u"https://translation.googleapis.com/language/translate/v2/detect"
+GT_TRANSLATE = u"https://translation.googleapis.com/language/translate/v2"
 
 ## wiktionary
-WIKI_FR_CJGTR = "https://fr.wiktionary.org/wiki/Annexe:Conjugaison_en_français/"
+WIKI_FR_CJGTR = u"https://fr.wiktionary.org/wiki/Annexe:Conjugaison_en_français/"
