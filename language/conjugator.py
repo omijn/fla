@@ -5,83 +5,83 @@ import wiki_telecharger_fr as wtf
 tenses = [
 	{	
 		"code": 0,
-		"mode": "Indicatif",		
-		"name": "Présent"
+		"mode": strings.MODES["IND"],		
+		"name": strings.TENSES["IND_PRES"]
 	},
 	{	
 		"code": 1,
-		"mode": "Indicatif",		
-		"name": "Passé Composé"
+		"mode": strings.MODES["IND"],		
+		"name": strings.TENSES["IND_PC"]
 	},
 	{	
 		"code": 2,
-		"mode": "Indicatif",		
-		"name": "Imparfait"
-	},
+		"mode": strings.MODES["IND"],		
+		"name": strings.TENSES["IND_IPF"]
+	},	
 	{	
 		"code": 3,
-		"mode": "Indicatif",		
-		"name": "Plus-que-parfait"
+		"mode": strings.MODES["IND"],		
+		"name": strings.TENSES["IND_PQP"]
 	},
 	{			
 		"code": 4,
-		"mode": "Indicatif",		
-		"name": "Passé Simple"
+		"mode": strings.MODES["IND"],		
+		"name": strings.TENSES["IND_PS"]
 	},
 	{	
 		"code": 5,
-		"mode": "Indicatif",		
-		"name": "Passé Antérieur"
+		"mode": strings.MODES["IND"],		
+		"name": strings.TENSES["IND_PA"]
 	},
 	{	
 		"code": 6,
-		"mode": "Indicatif",		
-		"name": "Futur Simple"
+		"mode": strings.MODES["IND"],		
+		"name": strings.TENSES["IND_FS"]
 	},
 	{	
 		"code": 7,
-		"mode": "Indicatif",		
-		"name": "Futur Antérieur"
+		"mode": strings.MODES["IND"],		
+		"name": strings.TENSES["IND_FA"]
 	},
 	{	
 		"code": 8,
-		"mode": "Subjonctif",		
-		"name": "Présent"
+		"mode": strings.MODES["SUBJ"],
+		"name": strings.TENSES["SUBJ_PRES"]
 	},
 	{	
 		"code":  9,
-		"mode": "Subjonctif",		
-		"name": "Passé"
+		"mode": strings.MODES["SUBJ"],
+		"name": strings.TENSES["SUBJ_P"]
 	},
 	{	
 		"code": 10,
-		"mode": "Subjonctif",		
-		"name": "Imparfait"
+		"mode": strings.MODES["SUBJ"],
+		"name": strings.TENSES["SUBJ_IMP"]
 	},
 	{	
 		"code": 11,
-		"mode": "Subjonctif",		
-		"name": "Plus-que-parfait"
+		"mode": strings.MODES["SUBJ"],
+		"name": strings.TENSES["SUBJ_PQP"]
 	},
 	{	
 		"code": 12,
-		"mode": "Conditionnel",		
-		"name": "Présent"
+		"mode": strings.MODES["COND"],		
+		"name": strings.TENSES["COND_PRES"]
 	},
 	{	
 		"code": 13,
-		"mode": "Conditionnel",		
-		"name": "Passé"
+		"mode": strings.MODES["COND"],		
+		"name": strings.TENSES["COND_P"]
 	},
 	{	
 		"code": 14,
-		"mode": "Impératif",		
-		"name": "Présent"
+		"mode": strings.MODES["IMP"],
+		"name": strings.TENSES["IMP_PRES"]
 	},
 	{	
 		"code": 15,
-		"mode": "Impératif",		
-		"name": "Passé"
+		"mode": strings.MODES["IMP"],
+		"name": strings.TENSES["IMP_P"]
 	}
 ]
 

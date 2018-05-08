@@ -33,6 +33,7 @@ class Parser():
             response = self.formatter.ask_verb_tense(userWantsMoreOptions=True)
 
         elif intent == strings.CONJUGATE_VERB_INTENT:
+            verb = data['queryResult']['outputContexts'][0]['parameters']['frenchVerb']
             pass
 
         elif intent == strings.GENDER_INTENT:
@@ -111,7 +112,7 @@ class Formatter:
         # quick_replies = [{"content_type":"text", "title": tense['name'], "payload": "{}{}{}{}{}".format(strings.PAYLOAD_CONJUGATE, strings.PAYLOAD_DELIMITER, verb, strings.PAYLOAD_DELIMITER, tense['code'])} for tense in language.conjugator.tenses]    
         # response['fulfillmentMessages'][0]['quickReplies'].extend(quick_replies)
 
-        print(json.dumps(response, indent=4))
+        # print(json.dumps(response, indent=4))
         return json.dumps(response)
 
     def conjugate_verb(self, conjugation):
