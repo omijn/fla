@@ -15,6 +15,10 @@ FALLBACK_INTENT  = u"fallback"
 
 DATA_SOURCE = u"Google/Wiktionary/Other"
 
+DATA_SOURCES = {
+	"translation": "Google"
+}
+
 # conjugations
 SHOW_MORE_TENSES = u"More"
 HOW_TO_CONJ = u"How do you want to conjugate the verb?"
@@ -49,6 +53,15 @@ VERB_NOT_FOUND = u"Sorry, that verb was not found."
 
 # genders
 WORD_NOT_FOUND = u"Sorry, that word was not found."
+
+# translations
+ISO_639_1_ENGLISH = "en"
+ISO_639_1_FRENCH = "fr"
+
+LANGUAGES = {
+	ISO_639_1_ENGLISH: "English",
+	ISO_639_1_FRENCH: "French"
+}
 
 # API endpoints and data sources
 

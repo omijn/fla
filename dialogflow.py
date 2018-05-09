@@ -5,19 +5,18 @@ import json
 import strings
 import language.conjugator
 import language.gender.gender_fr
+from language import translator
 
 from num2words import num2words
 
 # import .language.pronouncer
-# import .language.translator
 # import .language.examples
 
 
 class Parser():
     """Parse incoming requests from Dialogflow"""
 
-    def __init__(self):
-        
+    def __init__(self):        
         self.formatter = Formatter()
 
     def parse(self, data):
@@ -66,13 +65,20 @@ class Parser():
             pass
 
         elif intent == strings.FALLBACK_INTENT:
-            if 'quick_reply' in data['originalRequest']['data']['message']:
-                payload = data['originalRequest']['data']['message']['quick_reply']['payload']
-                parts = payload.split(strings.PAYLOAD_DELIMITER)
+            # assume the user wants to translate something
+            text = data['queryResult']['queryText']
+            source = translator.detect(text)
+            if source == strings.ISO_639_1_ENGLISH:
+                target = strings.ISO_639_1_FRENCH
+            else:
+                target = strings.ISO_639_1_ENGLISH
+            
+            translation = translator.translate(text, source, target)
+            
+            source = strings.LANGUAGES[source]
+            target = strings.LANGUAGES[target]
 
-                if parts[0] == strings.PAYLOAD_CONJUGATE:
-                    conjugation = language.conjugator.conjugate(verb=parts[1], tense_code=parts[2])
-                    response = self.formatter.conjugate_verb(conjugation)
+            response = self.formatter.display_translation(translation, source, target)
                     
         return response     
 
@@ -110,11 +116,7 @@ class Formatter:
             "source": strings.DATA_SOURCE,
             "followupEventInput": {}
         }
-
-        # quick_replies = [{"content_type":"text", "title": tense['name'], "payload": "{}{}{}{}{}".format(strings.PAYLOAD_CONJUGATE, strings.PAYLOAD_DELIMITER, verb, strings.PAYLOAD_DELIMITER, tense['code'])} for tense in language.conjugator.tenses]    
-        # response['fulfillmentMessages'][0]['quickReplies'].extend(quick_replies)
-
-        # print(json.dumps(response, indent=4))
+        
         return json.dumps(response)
 
     def display_conjugation(self, conjugation):
@@ -152,6 +154,19 @@ class Formatter:
             "payload": {},
             "outputContexts": [],
             "source": strings.DATA_SOURCE,
+            "followupEventInput": {}
+        }
+
+        return json.dumps(response)
+
+    def display_translation(self, translation, source, target):
+
+        trans = u"{}\n\n(translated from {} to {})".format(translation, source, target)
+        response = {
+            "fulfillmentText": trans,            
+            "payload": {},
+            "outputContexts": [],
+            "source": strings.DATA_SOURCES["translation"],
             "followupEventInput": {}
         }
 
