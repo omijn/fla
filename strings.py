@@ -20,22 +20,22 @@ SHOW_MORE_TENSES = u"More"
 HOW_TO_CONJ = u"How do you want to conjugate the verb?"
 
 TENSES = {
-	"IND_PRES": u"Présent",
-	"IND_PC": u"Passé Composé",
-	"IND_IPF": u"Imparfait",
-	"IND_PQP": u"Plus-que-parfait",
-	"IND_PS": u"Passé Simple",
-	"IND_PA": u"Passé Antérieur",
-	"IND_FS": u"Futur Simple",
-	"IND_FA": u"Futur Antérieur",
-	"SUBJ_PRES": u"Présent: subj.",
-	"SUBJ_P": u"Passé: subj.",
-	"SUBJ_IMP": u"Imparfait: subj.",
-	"SUBJ_PQP": u"Plus-que-parfait:sub",
-	"COND_PRES": u"Présent: cond.",
-	"COND_P": u"Passé: cond.",
-	"IMP_PRES": u"Présent: imp.",
-	"IMP_P": u"Passé: imp."
+	"IND_PRES" : {"name": u"Présent",              "shortname": u"Présent"},
+	"IND_PC"   : {"name": u"Passé Composé",        "shortname": u"Passé Composé"},
+	"IND_IPF"  : {"name": u"Imparfait",            "shortname": u"Imparfait"},
+	"IND_PQP"  : {"name": u"Plus-que-parfait",     "shortname": u"Plus-que-parfait"},
+	"IND_PS"   : {"name": u"Passé Simple",         "shortname": u"Passé Simple"},
+	"IND_PA"   : {"name": u"Passé Antérieur",      "shortname": u"Passé Antérieur"},
+	"IND_FS"   : {"name": u"Futur Simple",         "shortname": u"Futur Simple"},
+	"IND_FA"   : {"name": u"Futur Antérieur",      "shortname": u"Futur Antérieur"},
+	"SUBJ_PRES": {"name": u"Présent: subj.",       "shortname": u"Présent"},
+	"SUBJ_P"   : {"name": u"Passé: subj.",         "shortname": u"Passé"},
+	"SUBJ_IMP" : {"name": u"Imparfait: subj.",     "shortname": u"Imparfait"},
+	"SUBJ_PQP" : {"name": u"Plus-que-parfait:sub", "shortname": u"Plus-que-parfait"},
+	"COND_PRES": {"name": u"Présent: cond.",       "shortname": u"Présent"},
+	"COND_P"   : {"name": u"Passé: cond.",         "shortname": u"Passé"},
+	"IMP_PRES" : {"name": u"Présent: imp.",        "shortname": u"Présent"},
+	"IMP_P"    : {"name": u"Passé: imp.",          "shortname": u"Passé"}
 }
 
 MODES = {
