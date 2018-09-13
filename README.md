@@ -6,7 +6,6 @@ Facebook Messenger App with a conversational interface and provides the followin
 2) Word gender identification (complete)
 3) Verb conjugations (complete)
 4) Bi-directional translations (complete)
-5) Word usage
+5) Word usage examples
 6) Pronunciation
 7) Numeric translations (complete)
-8) Word usage examples
